@@ -6,11 +6,10 @@ import { NIVEAUX } from "../data/programmes";
 import { useWhatsApp } from "../context/WhatsAppContext";
 
 export default function Programmes() {
-  useSEO({
-    title: "Programmes et frais — LPU | Vers l'Inde",
-    description:
-      "Toutes les filières disponibles à Lovely Professional University (LPU) et leurs frais par semestre : diplômes, licences, masters et doctorats.",
-  });
+  useSEO(
+  "Programmes et frais — LPU | Vers l'Inde",
+  "Toutes les filières disponibles à Lovely Professional University (LPU) et leurs frais par semestre : diplômes, licences, masters et doctorats."
+);
 
   const [search, setSearch] = useState("");
   const [niveauActif, setNiveauActif] = useState("Tous");
