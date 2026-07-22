@@ -4,10 +4,14 @@ import PageHero from "../components/PageHero";
 import Reveal from "../components/Reveal";
 
 const photos = [
+  { src: "/photos/photo 1.jpeg", alt: "Photo à venir" },
+  { src: "/photos/photo 2.png", alt: "Photo à venir" },
   { src: "/photos/photo 3.jpeg", alt: "Photo à venir" },
   { src: "/photos/photo 4.jpeg", alt: "Photo à venir" },
   { src: "/photos/photo 5.jpeg", alt: "Photo à venir" },
+  { src: "/photos/photo 6.png", alt: "Photo à venir" },
   { src: "/photos/photo 7.png", alt: "Photo à venir" },
+  { src: "/photos/photo 8.jpeg", alt: "Photo à venir" },
   { src: "/photos/photo 9.jpeg", alt: "Photo à venir" },
   { src: "/photos/photo 10.jpeg", alt: "Photo à venir" },
   { src: "/photos/photo 11.jpeg", alt: "Photo à venir" },
@@ -36,13 +40,16 @@ const photos = [
   { src: "/photos/photo 34.jpeg", alt: "Photo à venir" },
   { src: "/photos/photo 35.jpeg", alt: "Photo à venir" },
   { src: "/photos/photo 36.jpeg", alt: "Photo à venir" },
-  { src: "/photos/photo 37.jpeg", alt: "Photo à venir" },
   { src: "/photos/photo 38.jpeg", alt: "Photo à venir" },
   { src: "/photos/photo 39.jpeg", alt: "Photo à venir" },
-  { src: "/photos/photo1.png", alt: "Photo à venir" },
-  { src: "/photos/photo2.jpeg", alt: "Photo à venir" },
-  { src: "/photos/photo6.png", alt: "Photo à venir" },
-  { src: "/photos/photo8.jpeg", alt: "Photo à venir" },
+  { src: "/photos/photo 40.jpeg", alt: "Photo à venir" },
+  { src: "/photos/photo 41.jpeg", alt: "Photo à venir" },
+  { src: "/photos/photo 42.jpeg", alt: "Photo à venir" },
+  { src: "/photos/photo 43.png", alt: "Photo à venir" },
+  { src: "/photos/photo 44.jpeg", alt: "Photo à venir" },
+  { src: "/photos/photo 45.jpeg", alt: "Photo à venir" },
+  { src: "/photos/photo 47.jpeg", alt: "Photo à venir" },
+  { src: "/photos/photo 48.jpeg", alt: "Photo à venir" },
 ];
 const studentTestimonials = [
   { name: "À compléter", role: "Étudiant béninois — LPU", youtubeId: null },
