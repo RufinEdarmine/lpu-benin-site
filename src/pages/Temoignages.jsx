@@ -106,15 +106,15 @@ export default function Temoignages() {
   const visiblePhotos = showAll ? photos : photos.slice(0, 4);
 
   const [lightboxIndex, setLightboxIndex] = useState(null);
-  const lightboxPhoto = lightboxIndex !== null ? visiblePhotos[lightboxIndex] : null;
+  const lightboxPhoto = lightboxIndex !== null ? photos[lightboxIndex] : null;
 
   function showPrev(e) {
     e.stopPropagation();
-    setLightboxIndex((i) => (i - 1 + visiblePhotos.length) % visiblePhotos.length);
+    setLightboxIndex((i) => (i - 1 + photos.length) % photos.length);
   }
   function showNext(e) {
     e.stopPropagation();
-    setLightboxIndex((i) => (i + 1) % visiblePhotos.length);
+    setLightboxIndex((i) => (i + 1) % photos.length);
   }
 
   useEffect(() => {
