@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSEO } from "../hooks/useSEO";
 import PageHero from "../components/PageHero";
 import Reveal from "../components/Reveal";
+import { useState, useEffect } from "react";
 
 const photos = [
   { src: "/photos/photo 1.jpeg", alt: "Photo à venir" },
@@ -103,8 +104,29 @@ function VideoCard({ name, role, youtubeId }) {
 }
 
 export default function Temoignages() {
-  const [lightbox, setLightbox] = useState(null);
-    const [showAll, setShowAll] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+const lightboxPhoto = lightboxIndex !== null ? visiblePhotos[lightboxIndex] : null;
+
+function showPrev(e) {
+  e.stopPropagation();
+  setLightboxIndex((i) => (i - 1 + visiblePhotos.length) % visiblePhotos.length);
+}
+function showNext(e) {
+  e.stopPropagation();
+  setLightboxIndex((i) => (i + 1) % visiblePhotos.length);
+}
+
+useEffect(() => {
+  if (lightboxIndex === null) return;
+  function handleKey(e) {
+    if (e.key === "ArrowLeft") showPrev(e);
+    if (e.key === "ArrowRight") showNext(e);
+    if (e.key === "Escape") setLightboxIndex(null);
+  }
+  document.addEventListener("keydown", handleKey);
+  return () => document.removeEventListener("keydown", handleKey);
+}, [lightboxIndex]);
+  const [showAll, setShowAll] = useState(false);
 const visiblePhotos = showAll ? photos : photos.slice(0, 4);
   useSEO(
     "Témoignages d'étudiants et de parents — LPU Bénin Conseil",
@@ -151,7 +173,7 @@ const visiblePhotos = showAll ? photos : photos.slice(0, 4);
       <button
         key={i}
         className="ph-photo"
-        onClick={() => setLightbox(p)}
+        onClick={() => setLightboxIndex(i)}
         aria-label={p.alt}
       >
         <img src={p.src} alt={p.alt} loading="lazy" />
@@ -186,9 +208,19 @@ const visiblePhotos = showAll ? photos : photos.slice(0, 4);
           </div>
         </div>
       </section>
-      {lightbox && (
-  <div className="lightbox" onClick={() => setLightbox(null)}>
-    <img src={lightbox.src} alt={lightbox.alt} />
+      {lightboxPhoto && (
+  <div className="lightbox" onClick={() => setLightboxIndex(null)}>
+    <button className="lightbox-nav lightbox-prev" onClick={showPrev} aria-label="Photo précédente">
+      ‹
+    </button>
+    <img
+      src={lightboxPhoto.src}
+      alt={lightboxPhoto.alt}
+      onClick={(e) => e.stopPropagation()}
+    />
+    <button className="lightbox-nav lightbox-next" onClick={showNext} aria-label="Photo suivante">
+      ›
+    </button>
   </div>
 )}
     </>
