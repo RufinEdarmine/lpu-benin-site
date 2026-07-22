@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSEO } from "../hooks/useSEO";
 import PageHero from "../components/PageHero";
 import Reveal from "../components/Reveal";
-import { useState, useEffect } from "react";
 
 const photos = [
   { src: "/photos/photo 1.jpeg", alt: "Photo à venir" },
@@ -52,16 +51,15 @@ const photos = [
   { src: "/photos/photo 47.jpeg", alt: "Photo à venir" },
   { src: "/photos/photo 48.jpeg", alt: "Photo à venir" },
 ];
+
 const studentTestimonials = [
   { name: "À compléter", role: "Étudiant béninois — LPU", youtubeId: null },
   { name: "À compléter", role: "Étudiant béninois — LPU", youtubeId: null },
   { name: "À compléter", role: "Étudiant béninois — LPU", youtubeId: null },
 ];
-
 const parentTestimonials = [
   { name: "À compléter", role: "Parent d'étudiant", youtubeId: null },
 ];
-
 const embassyTestimonials = [
   { name: "Ambassade du Bénin en Inde", role: "En cours de préparation", youtubeId: null },
 ];
@@ -104,30 +102,32 @@ function VideoCard({ name, role, youtubeId }) {
 }
 
 export default function Temoignages() {
-  const [lightboxIndex, setLightboxIndex] = useState(null);
-const lightboxPhoto = lightboxIndex !== null ? visiblePhotos[lightboxIndex] : null;
-
-function showPrev(e) {
-  e.stopPropagation();
-  setLightboxIndex((i) => (i - 1 + visiblePhotos.length) % visiblePhotos.length);
-}
-function showNext(e) {
-  e.stopPropagation();
-  setLightboxIndex((i) => (i + 1) % visiblePhotos.length);
-}
-
-useEffect(() => {
-  if (lightboxIndex === null) return;
-  function handleKey(e) {
-    if (e.key === "ArrowLeft") showPrev(e);
-    if (e.key === "ArrowRight") showNext(e);
-    if (e.key === "Escape") setLightboxIndex(null);
-  }
-  document.addEventListener("keydown", handleKey);
-  return () => document.removeEventListener("keydown", handleKey);
-}, [lightboxIndex]);
   const [showAll, setShowAll] = useState(false);
-const visiblePhotos = showAll ? photos : photos.slice(0, 4);
+  const visiblePhotos = showAll ? photos : photos.slice(0, 4);
+
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+  const lightboxPhoto = lightboxIndex !== null ? visiblePhotos[lightboxIndex] : null;
+
+  function showPrev(e) {
+    e.stopPropagation();
+    setLightboxIndex((i) => (i - 1 + visiblePhotos.length) % visiblePhotos.length);
+  }
+  function showNext(e) {
+    e.stopPropagation();
+    setLightboxIndex((i) => (i + 1) % visiblePhotos.length);
+  }
+
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    function handleKey(e) {
+      if (e.key === "ArrowLeft") showPrev(e);
+      if (e.key === "ArrowRight") showNext(e);
+      if (e.key === "Escape") setLightboxIndex(null);
+    }
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, [lightboxIndex]);
+
   useSEO(
     "Témoignages d'étudiants et de parents — LPU Bénin Conseil",
     "Vidéos d'étudiants béninois et africains, de parents, et de l'ambassade du Bénin en Inde."
@@ -164,65 +164,67 @@ const visiblePhotos = showAll ? photos : photos.slice(0, 4);
         </div>
       </section>
 
-<section className="section" style={{ background: "var(--paper-100)" }}>
+      <section className="section" style={{ background: "var(--paper-100)" }}>
         <div className="container">
           <Reveal><span className="eyebrow">En images</span><h2>Quelques moments en photos</h2></Reveal>
           <div className="mini-gallery" style={{ marginTop: 32 }}>
-  {visiblePhotos.map((p, i) =>
-    p.src ? (
-      <button
-        key={i}
-        className="ph-photo"
-        onClick={() => setLightboxIndex(i)}
-        aria-label={p.alt}
-      >
-        <img src={p.src} alt={p.alt} loading="lazy" />
-      </button>
-    ) : (
-      <div key={i} className="ph">
-        <span>{p.alt}</span>
-      </div>
-    )
-  )}
-</div>
-{!showAll && photos.length > 4 && (
-  <div style={{ textAlign: "center", marginTop: 24 }}>
-    <button className="btn btn-secondary" onClick={() => setShowAll(true)}>
-      Voir plus de photos ({photos.length - 4})
-    </button>
-  </div>
-)}
+            {visiblePhotos.map((p, i) =>
+              p.src ? (
+                <button
+                  key={i}
+                  className="ph-photo"
+                  onClick={() => setLightboxIndex(i)}
+                  aria-label={p.alt}
+                >
+                  <img src={p.src} alt={p.alt} loading="lazy" />
+                </button>
+              ) : (
+                <div key={i} className="ph">
+                  <span>{p.alt}</span>
+                </div>
+              )
+            )}
+          </div>
+          {!showAll && photos.length > 4 && (
+            <div style={{ textAlign: "center", marginTop: 24 }}>
+              <button className="btn btn-secondary" onClick={() => setShowAll(true)}>
+                Voir plus de photos ({photos.length - 4})
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
       <section className="section" style={{ background: "var(--navy-900)", color: "#fff" }}>
         <div className="container text-center">
           <h2 style={{ color: "#fff" }}>Vous aussi, vous pourriez être notre prochain témoignage.</h2>
-          
-            <div className="btn btn-wa btn-lg">
-            <a href={`https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER}?text=${encodeURIComponent("Bonjour, je souhaite parler à un conseiller LPU maintenant.")}`}
-            target="_blank" rel="noopener"
-          >
-            Commencer votre propre parcours
-          </a>
+          <div className="btn btn-wa btn-lg">
+            
+              href={`https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER}?text=${encodeURIComponent("Bonjour, je souhaite parler à un conseiller LPU maintenant.")}`}
+              target="_blank"
+              rel="noopener"
+            >
+              Commencer votre propre parcours
+            </a>
           </div>
         </div>
       </section>
+
       {lightboxPhoto && (
-  <div className="lightbox" onClick={() => setLightboxIndex(null)}>
-    <button className="lightbox-nav lightbox-prev" onClick={showPrev} aria-label="Photo précédente">
-      ‹
-    </button>
-    <img
-      src={lightboxPhoto.src}
-      alt={lightboxPhoto.alt}
-      onClick={(e) => e.stopPropagation()}
-    />
-    <button className="lightbox-nav lightbox-next" onClick={showNext} aria-label="Photo suivante">
-      ›
-    </button>
-  </div>
-)}
+        <div className="lightbox" onClick={() => setLightboxIndex(null)}>
+          <button className="lightbox-nav lightbox-prev" onClick={showPrev} aria-label="Photo précédente">
+            ‹
+          </button>
+          <img
+            src={lightboxPhoto.src}
+            alt={lightboxPhoto.alt}
+            onClick={(e) => e.stopPropagation()}
+          />
+          <button className="lightbox-nav lightbox-next" onClick={showNext} aria-label="Photo suivante">
+            ›
+          </button>
+        </div>
+      )}
     </>
   );
 }
