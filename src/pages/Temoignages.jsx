@@ -97,7 +97,8 @@ function VideoCard({ name, role, youtubeId }) {
 
 export default function Temoignages() {
   const [lightbox, setLightbox] = useState(null);
-    
+    const [showAll, setShowAll] = useState(false);
+const visiblePhotos = showAll ? photos : photos.slice(0, 4);
   useSEO(
     "Témoignages d'étudiants et de parents — LPU Bénin Conseil",
     "Vidéos d'étudiants béninois et africains, de parents, et de l'ambassade du Bénin en Inde."
@@ -138,7 +139,7 @@ export default function Temoignages() {
         <div className="container">
           <Reveal><span className="eyebrow">En images</span><h2>Quelques moments en photos</h2></Reveal>
           <div className="mini-gallery" style={{ marginTop: 32 }}>
-  {photos.map((p, i) =>
+  {visiblePhotos.map((p, i) =>
     p.src ? (
       <button
         key={i}
@@ -155,6 +156,13 @@ export default function Temoignages() {
     )
   )}
 </div>
+{!showAll && photos.length > 4 && (
+  <div style={{ textAlign: "center", marginTop: 24 }}>
+    <button className="btn btn-secondary" onClick={() => setShowAll(true)}>
+      Voir plus de photos ({photos.length - 4})
+    </button>
+  </div>
+)}
         </div>
       </section>
 
