@@ -200,7 +200,7 @@ export default function Temoignages() {
           <h2 style={{ color: "#fff" }}>Vous aussi, vous pourriez être notre prochain témoignage.</h2>
           <div className="btn btn-wa btn-lg">
             
-              href={`https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER}?text=${encodeURIComponent("Bonjour, je souhaite parler à un conseiller LPU maintenant.")}`}
+              <a href={`https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER}?text=${encodeURIComponent("Bonjour, je souhaite parler à un conseiller LPU maintenant.")}`}
               target="_blank"
               rel="noopener"
             >
