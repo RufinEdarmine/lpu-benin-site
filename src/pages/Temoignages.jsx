@@ -146,7 +146,7 @@ export default function Temoignages() {
         onClick={() => setLightbox(p)}
         aria-label={p.alt}
       >
-        <img src={p.src} alt={p.alt} />
+        <img src={p.src} alt={p.alt} loading="lazy" />
       </button>
     ) : (
       <div key={i} className="ph">
